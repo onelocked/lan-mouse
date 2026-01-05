@@ -54,10 +54,7 @@ in {
         Type = "simple";
         ExecStart = "${cfg.package}/bin/lan-mouse daemon";
       };
-      Install.WantedBy = [
-        (lib.mkIf config.wayland.windowManager.hyprland.systemd.enable "hyprland-session.target")
-        (lib.mkIf config.wayland.windowManager.sway.systemd.enable "sway-session.target")
-      ];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
 
     launchd.agents.lan-mouse = lib.mkIf cfg.launchd {
